@@ -620,8 +620,6 @@ class Project(object):
         log("kubernetes start")
         nfs_server_ip = self.kubernetes_nfs_server_ip_address()
         pod_name = self.kubernetes_pod_name()
-        node_selector = "member" if member else "preempt"
-        network_label = "outside" if network else "none"
         yaml = """
 apiVersion: v1
 kind: Pod
@@ -630,18 +628,7 @@ metadata:
   labels:
     run: "project"
     project_id: "{project_id}"
-    network: "{network}"
-    node_selector: "{node_selector}"
 spec:
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: cloud.google.com/gke-nodepool
-            operator: In
-            values:
-            - cocalc-project
   containers:
     - name: "{pod_name}"
       image: "{registry}/cocalc-kubernetes-project"
@@ -690,8 +677,6 @@ spec:
             cpu_shares=max(
                 50, cpu_shares
             ),  # TODO: this must be less than cores or won't start, but UI doesn't restrict that
-            network=network_label,
-            node_selector=node_selector,
             extra_env=extra_env)
 
         # TODO: should use tempfile module
