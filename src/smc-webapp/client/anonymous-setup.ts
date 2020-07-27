@@ -12,7 +12,7 @@ import { WebappClient } from "./client";
 import { NAME as LAUNCH_NAME } from "../launch/actions";
 import { PROJECT_INVITE_QUERY_PARAM } from "../collaborators/handle-project-invite";
 
-export const ANON_PROJECT_TITLE = "Welcome to CoCalc!";
+export const ANON_PROJECT_TITLE = "Welcome to VLPOD!";
 
 /*
 If the anonymous query param is set at all (doesn't matter to what) during
