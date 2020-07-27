@@ -186,7 +186,7 @@ export const NewProjectCreator: React.FC<Props> = ({
           bsSize={"large"}
           style={{ width: "100%", margin: "30px 0" }}
         >
-          Sign up now so you can create more projects and not lose your work!
+          Sign up now so you can create more projects!
         </Button>
       );
     }
